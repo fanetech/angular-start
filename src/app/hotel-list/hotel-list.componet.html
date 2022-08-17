@@ -6,6 +6,32 @@
     </span>
     <span class="px-2"> {{showBadge ? "Cacher" : "Achicher"}} </span>
   </button>
+  <hr />
+  <div class="my-4">
+    <div class="row">
+      <div class="col-md-4">
+        <span>Filtre actuel: </span>
+        <b>{{hotelFilter}}</b>
+      </div>
+      <div class="col-md-8 form-group">
+        <input
+          type="text"
+          name=""
+          id=""
+          class="form-group"
+          [(ngModel)]="hotelFilter"
+        />
+        <!-- <input
+          type="text"
+          name=""
+          id=""
+          class="form-group"
+          [ngModel]="hotelFilter"
+          (ngModelChange)="hotelFilter = $event"
+        /> -->
+      </div>
+    </div>
+  </div>
   <div class="row">
     <div class="col mb-4" *ngFor="let hotel of hotels">
       <div class="card" style="width: 18rem">

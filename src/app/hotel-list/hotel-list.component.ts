@@ -42,6 +42,7 @@ export class HotelListComponent {
     },
   ];
   public showBadge: boolean = false;
+  public hotelFilter = 'mot';
   public toogleIsNewBadge(): void {
     this.showBadge = !this.showBadge;
   }
