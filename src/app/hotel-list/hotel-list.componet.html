@@ -1,5 +1,5 @@
 <div class="container">
-  <h2 *ngIf="hotels && hotels.length >0">{{title}}</h2>
+  <h2 *ngIf="hotels && hotels.length >0">{{title | uppercase}}</h2>
   <button class="btn btn-primary mb-4 d-flex" (click)="toogleIsNewBadge()">
     <span class="material-icons">
       {{showBadge ? "visibility_off" : "visibility"}}
@@ -44,7 +44,9 @@
         <div class="card-body">
           <h5 class="card-title">{{ hotel.hotelName }}</h5>
           <p class="card-text">{{ hotel.description}}</p>
-          <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+          <p class="cart-text">
+            {{ hotel.price | currency : "EUR": "symbol": "1.2-2" : "fr" }}
+          </p>
         </div>
 
         <button type="button" class="btn btn-primary" *ngIf="showBadge">
