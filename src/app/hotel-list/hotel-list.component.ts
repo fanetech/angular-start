@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IHotel } from './hotel';
 
 @Component({
@@ -6,7 +6,7 @@ import { IHotel } from './hotel';
   templateUrl: './hotel-list.componet.html',
   styleUrls: [],
 })
-export class HotelListComponent {
+export class HotelListComponent implements OnInit {
   public title = "Liste d'hotel";
   public hotels: IHotel[] = [
     {
@@ -44,6 +44,11 @@ export class HotelListComponent {
   ];
   public showBadge: boolean = false;
   public hotelFilter = 'mot';
+
+  ngOnInit(): void {
+    console.log("display if component in mont")
+    
+  }
   public toogleIsNewBadge(): void {
     this.showBadge = !this.showBadge;
   }
