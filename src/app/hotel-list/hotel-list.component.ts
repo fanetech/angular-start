@@ -4,7 +4,7 @@ import { IHotel } from './hotel';
 @Component({
   selector: 'app-hotel-list',
   templateUrl: './hotel-list.componet.html',
-  styleUrls: [],
+  styleUrls: ["./hotel-list.component.css"],
 })
 export class HotelListComponent implements OnInit {
   public title = "Liste d'hotel";
