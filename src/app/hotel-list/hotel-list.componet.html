@@ -31,6 +31,9 @@
         /> -->
       </div>
     </div>
+    <div class="alert alert-primary" *ngIf="!!recieveRating">
+      {{recieveRating}}
+    </div>
   </div>
   <div class="row">
     <div class="col mb-4" *ngFor="let hotel of filteredHotel">
@@ -47,7 +50,7 @@
           <p class="cart-text">
             {{ hotel.price | currency : "EUR": "symbol": "1.2-2" : "fr" | replaceComma }}
           </p>
-          <app-star-rating [rating]="hotel.rating" ></app-star-rating>
+          <app-star-rating [rating]="hotel.rating" (starRatingClicked)="recieveRatingClicked($event)"></app-star-rating>
         </div>
 
         <button type="button" class="btn btn-primary" *ngIf="showBadge">

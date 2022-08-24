@@ -45,6 +45,7 @@ export class HotelListComponent implements OnInit {
   public showBadge: boolean = false;
  private _hotelFilter = 'mot';
   public filteredHotel : IHotel[] = []
+  public recieveRating: string = ""
 
   ngOnInit(): void {
     this.filteredHotel = this.hotels
@@ -71,5 +72,10 @@ export class HotelListComponent implements OnInit {
     )
     return res
 
+  }
+
+  public recieveRatingClicked(message : string){
+
+    this.recieveRating = message
   }
 }
