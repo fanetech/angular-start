@@ -8,11 +8,11 @@ import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr'
 import { ReplaceComma } from './shared/replace-comma-pipe';
 import { startRatingComponent } from './shared/components/start-rating/star-rating.component';
-
+import {HttpClientModule} from "@angular/common/http"
 registerLocaleData(localeFr, "fr")
 @NgModule({
   declarations: [AppComponent, HotelListComponent, ReplaceComma, startRatingComponent],
-  imports: [BrowserModule, FormsModule],
+  imports: [BrowserModule, FormsModule, HttpClientModule],
   providers: [],
   bootstrap: [AppComponent],
 })

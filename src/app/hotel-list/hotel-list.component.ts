@@ -18,11 +18,17 @@ export class HotelListComponent implements OnInit {
  private _hotelFilter = 'mot';
   public filteredHotel : IHotel[] = []
   public recieveRating: string = ""
+  public errMsg: string = ""
 
   ngOnInit(): void {
-    this.hotels = this.hotelListService.getHotel()
-
-    this.filteredHotel = this.hotels
+   this.hotelListService.getHotel().subscribe({
+    next: hotels => {
+      this.hotels = hotels
+      this.filteredHotel = this.hotels
+    },
+    error: err => this.errMsg = err
+  })
+  
     this._hotelFilter = ""
     
   }
