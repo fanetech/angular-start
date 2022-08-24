@@ -7,10 +7,12 @@ import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from
 })
 export class startRatingComponent implements OnChanges{
     public startWidth :number = 0;
-    @Input()
+    @Input() 
     public rating :number =2
+
     @Output()
     public starRatingClicked: EventEmitter<string> = new EventEmitter<string>()
+
     ngOnChanges(){
         this.startWidth= this.rating * 125 / 5
         
