@@ -12,6 +12,9 @@
         <li class="nav-item" routerLinkActive="active">
           <a class="nav-link" [routerLink]="['/hotels']">Liste</a>
         </li>
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" [routerLink]="['/hotels', '0', 'edit']">Ajout hotel</a>
+        </li>
       </ul>
     </div>
   </nav>
@@ -20,7 +23,7 @@
 
     <h1>{{title}}</h1>
 </div>
-<div class="mt-4">
+<div class="mt-4 container">
 
     <router-outlet></router-outlet>
 </div>
