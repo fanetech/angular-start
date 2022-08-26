@@ -65,4 +65,25 @@ export class HotelListService{
         )
     }
 
+    public deleteHotel(id: number):Observable<{}>{
+        const url = `${this.HOTEL_API_URL}/${id}`
+
+        return this.http.delete<IHotel>(url).pipe(
+            catchError(this.handleError)
+        )
+
+    }
+
+    public createHotel(hotel : IHotel):Observable<IHotel>{
+        hotel ={
+            ...hotel,
+            imageUrl:'assets/img/hotel-room.jpg',
+            id:null as any
+          }
+        return this.http.post<IHotel>(this.HOTEL_API_URL, hotel).pipe(
+            catchError(this.handleError)
+        )
+
+    }
+
 }

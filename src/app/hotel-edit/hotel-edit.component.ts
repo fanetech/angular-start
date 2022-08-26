@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IHotel } from '../hotel/shared/models/hotel';
 import { HotelListService } from '../hotel/shared/services/hotel-list.service';
@@ -24,9 +24,10 @@ export class HotelEditComponent implements OnInit {
   ngOnInit(): void {
     this.hotelForm = this.fb.group({
       hotelName: ['', Validators.required],
-      hotelPrice: ['', Validators.required],
-      starRating:[''],
-      description: ['']
+      price: ['', Validators.required],
+      rating:[''],
+      description: [''],
+      tag: this.fb.array([])
     })
     this.route.paramMap.subscribe(param =>{
       const _id = param.get('id')
@@ -37,6 +38,21 @@ export class HotelEditComponent implements OnInit {
       }
     })
   }
+
+  public get tags (): FormArray{
+    return this.hotelForm.get('tag') as FormArray
+  }
+
+  public addTags(): void{
+    this.tags.push(new FormControl())
+  }
+
+  public deleteTag(index: number):void{
+    this.tags.removeAt(index)
+    this.tags.markAsDirty()
+  }
+
+  //display Hotel
   public getSelectorHotel(id: number){
     this.hotelService.getHotelById(id).subscribe(
       hotel => {
@@ -44,6 +60,8 @@ export class HotelEditComponent implements OnInit {
         this.displayHotel(hotel)
       })
   }
+
+  //update hotel
   public saveHotel(){
 
     if(this.hotelForm.valid){
@@ -53,7 +71,10 @@ export class HotelEditComponent implements OnInit {
           ...this.hotelForm.value
         }
         if(hotel.id === 0){
-          //edit
+        
+         this.hotelService.createHotel(hotel).subscribe({
+          next: () => this.saveCompleted()
+         })
         }
         else{
             this.hotelService.updateHotel(hotel).subscribe({
@@ -67,6 +88,8 @@ export class HotelEditComponent implements OnInit {
   }
 
 
+
+  //display hotel use by Selector hotel
   public displayHotel(hotel: IHotel){
     if(hotel.id ===0){
       this.pageTitle = "Créer un hotel"
@@ -76,14 +99,26 @@ export class HotelEditComponent implements OnInit {
     }
     this.hotel = hotel
 
+    //get form value
     this.hotelForm.patchValue({
       hotelName: this.hotel.hotelName,
-      hotelPrice: this.hotel.price,
-      starRating: this.hotel.rating,
+      price: this.hotel.price,
+      rating: this.hotel.rating,
       description: this.hotel.description
     })
   }
 
+  //delete hotel
+  public deleteHotel(){
+    if(confirm(`Voulez vous supprimer hotel ${this.hotel.hotelName} ?`)){
+      this.hotelService.deleteHotel(this.hotel.id).subscribe({
+        next: () => this.saveCompleted()
+      })
+    }
+
+  }
+
+  //reset hotel form
   public saveCompleted(): void{
     this.hotelForm.reset()
     this.router.navigate(['/hotels'])

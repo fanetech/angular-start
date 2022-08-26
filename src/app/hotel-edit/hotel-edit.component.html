@@ -1,5 +1,5 @@
 <div class="card">
-  <div class="card-header text-white bg-info">{{pageTitle}}</div>
+  <div class="card-header text-white bg-info">{{ pageTitle }}</div>
   <div class="card-body">
     <form novalidate (ngSubmit)="saveHotel()" [formGroup]="hotelForm">
       <div class="form-group row mb-2">
@@ -26,7 +26,7 @@
             class="form-control"
             placeholder="Prix de l'hotel (Obligatoire)"
             id="hotelPriceId"
-            formControlName="hotelPrice"
+            formControlName="price"
           />
         </div>
       </div>
@@ -40,10 +40,32 @@
             class="form-control"
             placeholder="Evaluation de l'hotel (1 à 5)"
             id="hotelRatingId"
-            formControlName="starRating"
+            formControlName="rating"
           />
         </div>
       </div>
+      <div formArrayName="tags" >
+ <div class="form-group row mb-2" *ngFor="let tag of tags.controls; let i=index">
+        <label [attr.for]="i" for="" class="col-md-2 col-form-label">
+        {{  'Etiquette' + 1}}
+        </label>
+        <div class="col-md-8">
+          <input type="text" class="form-control" placeholder="{{'Etiquette' + 1}}" [formControlName]="i" [id]="i">
+        </div>
+        <button class="col-md-2 btn btn-outline-danger btn-sm"(click)="deleteTag(i)">
+          Supprimer
+        </button>
+      </div>
+      <div class="row">
+        <div class="col-md-2 md-2">
+          <button class="btn btn-outline-primary btn-sm" (click)="addTags()">
+            Ajouter Etiquette
+          </button>
+
+        </div>
+      </div>
+      </div>
+     
       <div class="form-group row mb-2">
         <label for="hotelDescriptionId" class="col-md-2 col-form-label"
           >Description:</label
@@ -62,10 +84,19 @@
       <div class="form-group row mb-2">
         <div class="offset-md-2 col-md-10">
           <button class="btn btn-info mr-3" type="submit">Sauvegarder</button>
-          <button class="btn btn-outline-secondary mr-3" type="button" routerLink="/hotels">
+          <button
+            class="btn btn-outline-secondary mr-3"
+            type="button"
+            routerLink="/hotels"
+          >
             Annuler
           </button>
-          <button class="btn btn-outline-danger" type="button">
+          <button
+            class="btn btn-outline-danger"
+            type="button"
+            (click)="deleteHotel()"
+            [disabled]="hotel.id === 0"
+          >
             Supprimer
           </button>
         </div>
@@ -74,5 +105,5 @@
   </div>
 </div>
 <pre>
-    {{hotelForm.value | json}}
+    {{ hotelForm.value | json }}
 </pre>
