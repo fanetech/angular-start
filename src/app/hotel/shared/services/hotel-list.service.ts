@@ -8,27 +8,40 @@ import { IHotel } from "../models/hotel";
     providedIn:'root'
 })
 export class HotelListService{
-    private readonly HOTEL_API_URL = "api/hotel.json"
+    private readonly HOTEL_API_URL = "api/hotels"
 
     constructor(private http: HttpClient    ){}
+
     public getHotel(): Observable<IHotel[]>{
         return this.http.get<IHotel[]>(this.HOTEL_API_URL).pipe(
             tap(hotels => console.log("hotels", hotels)),
             catchError(this.handleError)
         )
     }
+
     public getHotelById(id : number){
         if(id === 0){
             return of(this.getDefaultHotel())
         }
-        return this.getHotel().pipe(
-            map(hotels => hotels.find(hotel => hotel.hotelId === id))
+        const url = `${this.HOTEL_API_URL}/${id}`
+        return this.http.get<IHotel>(url).pipe(
+            catchError(this.handleError)
         )
 
     }
+
+    public updateHotel(hotel: IHotel):Observable<IHotel>{
+        const url = `${this.HOTEL_API_URL}/${hotel.id}`
+        return this.http.put<IHotel>(url, hotel).pipe(
+            catchError(this.handleError)
+        )
+
+    }
+
+   
     private  getDefaultHotel():  IHotel {
         return{
-            hotelId:0,
+            id:0,
             hotelName:"",
             price:0,
             description:"",

@@ -52,10 +52,10 @@
           </p>
           <div class="d-flex justify-content-between align-items-baseline">
             <app-star-rating [rating]="hotel.rating" (starRatingClicked)="recieveRatingClicked($event)"></app-star-rating>
-            <div class="material-icons bg-info text-white p-2 rounded-circle btn" [routerLink]="['/hotels', hotel.hotelId]">
+            <div class="material-icons bg-info text-white p-2 rounded-circle btn" [routerLink]="['/hotels', hotel.id]">
               add
             </div>
-            <div class="material-icons bg-primary text-white p-2 rounded-circle btn" [routerLink]="['/hotels', hotel.hotelId, 'edit']">
+            <div class="material-icons bg-primary text-white p-2 rounded-circle btn" [routerLink]="['/hotels', hotel.id, 'edit']">
               edit
             </div>
           </div>

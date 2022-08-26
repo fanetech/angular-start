@@ -24,7 +24,7 @@ export class HotelDetailComponent implements OnInit {
      const _id = parseInt(id)
       this.hotelListService.getHotel().subscribe(
         (hotels) =>{
-          this.hotel = hotels.find((hotel) => hotel.hotelId === _id)
+          this.hotel = hotels.find((hotel) => hotel.id === _id)
           console.log(this.hotel)
         }
       )
