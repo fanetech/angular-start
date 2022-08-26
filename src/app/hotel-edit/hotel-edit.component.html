@@ -52,13 +52,13 @@
         <div class="col-md-8">
           <input type="text" class="form-control" placeholder="{{'Etiquette' + 1}}" [formControlName]="i" [id]="i">
         </div>
-        <button class="col-md-2 btn btn-outline-danger btn-sm"(click)="deleteTag(i)">
+        <button type="button" class="col-md-2 btn btn-outline-danger btn-sm"(click)="deleteTag(i)">
           Supprimer
         </button>
       </div>
       <div class="row">
         <div class="col-md-2 md-2">
-          <button class="btn btn-outline-primary btn-sm" (click)="addTags()">
+          <button type="button" class="btn btn-outline-primary btn-sm" (click)="addTags()">
             Ajouter Etiquette
           </button>
 
@@ -95,7 +95,7 @@
             class="btn btn-outline-danger"
             type="button"
             (click)="deleteHotel()"
-            [disabled]="hotel.id === 0"
+            [disabled]="hotel?.id === 0"
           >
             Supprimer
           </button>

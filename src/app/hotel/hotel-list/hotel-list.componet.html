@@ -48,22 +48,32 @@
           <h5 class="card-title">{{ hotel.hotelName | titlecase}}</h5>
           <p class="card-text">{{ hotel.description}}</p>
           <p class="cart-text">
-            {{ hotel.price | currency : "EUR": "symbol": "1.2-2" : "fr" | replaceComma }}
+            {{ hotel.price | currency : "EUR": "symbol": "1.2-2" : "fr" |
+            replaceComma }}
           </p>
           <div class="d-flex justify-content-between align-items-baseline">
-            <app-star-rating [rating]="hotel.rating" (starRatingClicked)="recieveRatingClicked($event)"></app-star-rating>
-            <div class="material-icons bg-info text-white p-2 rounded-circle btn" [routerLink]="['/hotels', hotel.id]">
+            <app-star-rating
+              [rating]="hotel.rating"
+              (starRatingClicked)="recieveRatingClicked($event)"
+            ></app-star-rating>
+            <div
+              class="material-icons bg-info text-white p-2 rounded-circle btn"
+              [routerLink]="['/hotels', hotel.id]"
+            >
               add
             </div>
-            <div class="material-icons bg-primary text-white p-2 rounded-circle btn" [routerLink]="['/hotels', hotel.id, 'edit']">
+            <div
+              class="material-icons bg-primary text-white p-2 rounded-circle btn"
+              [routerLink]="['/hotels', hotel.id, 'edit']"
+            >
               edit
             </div>
           </div>
         </div>
-        <div class="mb-2 ms-2" *ngFor="let tags of hotel.tags">
-          <button type="button" class="btn btn-primary" *ngIf="showBadge">
-            Nouveau
-          </button>
+        <div class="mb-2 ms-2" *ngFor="let tag of hotel.tags; let i=index" >
+          <ng-container *ngIf="showBadge">
+            <button type="button" class="btn" [ngClass]="i%2===0 ? 'btn-primary' : 'btn-info'">{{tag}}</button>
+          </ng-container>
         </div>
       </div>
     </div>

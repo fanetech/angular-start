@@ -40,7 +40,7 @@ export class HotelEditComponent implements OnInit {
   }
 
   public get tags (): FormArray{
-    return this.hotelForm.get('tag') as FormArray
+    return this.hotelForm.get('tags') as FormArray
   }
 
   public addTags(): void{
@@ -106,6 +106,7 @@ export class HotelEditComponent implements OnInit {
       rating: this.hotel.rating,
       description: this.hotel.description
     })
+    this.hotelForm.setControl('tags', this.fb.array(this.hotel.tags || []))
   }
 
   //delete hotel
