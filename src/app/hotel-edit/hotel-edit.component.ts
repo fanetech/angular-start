@@ -11,9 +11,10 @@ import { HotelListService } from '../hotel/shared/services/hotel-list.service';
 })
 export class HotelEditComponent implements OnInit {
 
-  public hotelForm: FormGroup
-  public hotel: IHotel
-  public pageTitle : string
+  public hotelForm!: FormGroup
+  public hotel!: IHotel;
+  public pageTitle!: string;
+  public errorMessage: string | undefined
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
@@ -73,12 +74,14 @@ export class HotelEditComponent implements OnInit {
         if(hotel.id === 0){
         
          this.hotelService.createHotel(hotel).subscribe({
-          next: () => this.saveCompleted()
+          next: () => this.saveCompleted(),
+          error:(err) => this.errorMessage=err
          })
         }
         else{
             this.hotelService.updateHotel(hotel).subscribe({
-              next: () => this.saveCompleted()
+              next: () => this.saveCompleted(),
+              error:(err) => this.errorMessage=err
             })
         }
       }
